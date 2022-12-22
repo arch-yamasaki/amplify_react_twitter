@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-ampliryreacttwitter-dev-114229-authRole",
+      "UnauthRoleArn": "arn:aws:iam::659370170127:role/amplify-ampliryreacttwitter-dev-114229-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::659370170127:role/amplify-ampliryreacttwitter-dev-114229-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-ampliryreacttwitter-dev-114229-deployment",
+      "UnauthRoleName": "amplify-ampliryreacttwitter-dev-114229-unauthRole",
+      "StackName": "amplify-ampliryreacttwitter-dev-114229",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:659370170127:stack/amplify-ampliryreacttwitter-dev-114229/47813ad0-81a2-11ed-8d67-0a1935c6b1ab",
+      "AmplifyAppId": "d3k779udva0zna"
+    }
+  }
+}
