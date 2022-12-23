@@ -66,6 +66,73 @@ export const syncTweets = /* GraphQL */ `
     }
   }
 `;
+export const getSamplePost = /* GraphQL */ `
+  query GetSamplePost($id: ID!) {
+    getSamplePost(id: $id) {
+      id
+      title
+      text
+      owner
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listSamplePosts = /* GraphQL */ `
+  query ListSamplePosts(
+    $filter: ModelSamplePostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSamplePosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        text
+        owner
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncSamplePosts = /* GraphQL */ `
+  query SyncSamplePosts(
+    $filter: ModelSamplePostFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncSamplePosts(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        title
+        text
+        owner
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const tweetsByTypeAndTimestamp = /* GraphQL */ `
   query TweetsByTypeAndTimestamp(
     $type: String!

@@ -30,3 +30,57 @@ export const onDeleteTweet = /* GraphQL */ `
     }
   }
 `;
+export const onCreateSamplePost = /* GraphQL */ `
+  subscription OnCreateSamplePost(
+    $filter: ModelSubscriptionSamplePostFilterInput
+    $owner: String
+  ) {
+    onCreateSamplePost(filter: $filter, owner: $owner) {
+      id
+      title
+      text
+      owner
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateSamplePost = /* GraphQL */ `
+  subscription OnUpdateSamplePost(
+    $filter: ModelSubscriptionSamplePostFilterInput
+    $owner: String
+  ) {
+    onUpdateSamplePost(filter: $filter, owner: $owner) {
+      id
+      title
+      text
+      owner
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteSamplePost = /* GraphQL */ `
+  subscription OnDeleteSamplePost(
+    $filter: ModelSubscriptionSamplePostFilterInput
+    $owner: String
+  ) {
+    onDeleteSamplePost(filter: $filter, owner: $owner) {
+      id
+      title
+      text
+      owner
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;

@@ -19,3 +19,14 @@ type Tweet
     owner: String @index(name: "BySpesificOwner", sortKeyFields:["timestamp"])
     timestamp: Int!
   }
+
+type SamplePost @model
+@auth(rules : [
+  { allow: owner }
+])
+{
+  id: ID!
+  title: String!
+  text: String
+  owner: String
+}
