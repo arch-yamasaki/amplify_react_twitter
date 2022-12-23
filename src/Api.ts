@@ -2,20 +2,23 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateUserInput = {
+export type CreateTweetInput = {
   id?: string | null,
-  name: string,
-  is_admin: boolean,
-  image?: string | null,
+  type: string,
+  content: string,
+  owner?: string | null,
+  timestamp: number,
+  _version?: number | null,
 };
 
-export type ModelUserConditionInput = {
-  name?: ModelStringInput | null,
-  is_admin?: ModelBooleanInput | null,
-  image?: ModelStringInput | null,
-  and?: Array< ModelUserConditionInput | null > | null,
-  or?: Array< ModelUserConditionInput | null > | null,
-  not?: ModelUserConditionInput | null,
+export type ModelTweetConditionInput = {
+  type?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  owner?: ModelStringInput | null,
+  timestamp?: ModelIntInput | null,
+  and?: Array< ModelTweetConditionInput | null > | null,
+  or?: Array< ModelTweetConditionInput | null > | null,
+  not?: ModelTweetConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -58,63 +61,44 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type ModelBooleanInput = {
-  ne?: boolean | null,
-  eq?: boolean | null,
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
   attributeExists?: boolean | null,
   attributeType?: ModelAttributeTypes | null,
-};
-
-export type User = {
-  __typename: "User",
-  id: string,
-  name: string,
-  is_admin: boolean,
-  image?: string | null,
-  tweets?: ModelTweetConnection | null,
-  createdAt: string,
-  updatedAt: string,
-};
-
-export type ModelTweetConnection = {
-  __typename: "ModelTweetConnection",
-  items:  Array<Tweet | null >,
-  nextToken?: string | null,
 };
 
 export type Tweet = {
   __typename: "Tweet",
   id: string,
-  user?: User | null,
-  sentence: string,
-  createdAt: string,
-  updatedAt: string,
-  userTweetsId?: string | null,
+  type: string,
+  content: string,
+  owner?: string | null,
+  timestamp: number,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
 };
 
-export type UpdateUserInput = {
+export type DeleteTweetInput = {
   id: string,
-  name?: string | null,
-  is_admin?: boolean | null,
-  image?: string | null,
+  _version?: number | null,
 };
 
-export type DeleteUserInput = {
-  id: string,
-};
-
-export type CreateTweetInput = {
-  id?: string | null,
-  sentence: string,
-  userTweetsId?: string | null,
-};
-
-export type ModelTweetConditionInput = {
-  sentence?: ModelStringInput | null,
-  and?: Array< ModelTweetConditionInput | null > | null,
-  or?: Array< ModelTweetConditionInput | null > | null,
-  not?: ModelTweetConditionInput | null,
-  userTweetsId?: ModelIDInput | null,
+export type ModelTweetFilterInput = {
+  id?: ModelIDInput | null,
+  type?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  owner?: ModelStringInput | null,
+  timestamp?: ModelIntInput | null,
+  and?: Array< ModelTweetFilterInput | null > | null,
+  or?: Array< ModelTweetFilterInput | null > | null,
+  not?: ModelTweetFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -133,48 +117,35 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type UpdateTweetInput = {
-  id: string,
-  sentence?: string | null,
-  userTweetsId?: string | null,
-};
-
-export type DeleteTweetInput = {
-  id: string,
-};
-
-export type ModelUserFilterInput = {
-  id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
-  is_admin?: ModelBooleanInput | null,
-  image?: ModelStringInput | null,
-  and?: Array< ModelUserFilterInput | null > | null,
-  or?: Array< ModelUserFilterInput | null > | null,
-  not?: ModelUserFilterInput | null,
-};
-
-export type ModelUserConnection = {
-  __typename: "ModelUserConnection",
-  items:  Array<User | null >,
+export type ModelTweetConnection = {
+  __typename: "ModelTweetConnection",
+  items:  Array<Tweet | null >,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
-export type ModelTweetFilterInput = {
-  id?: ModelIDInput | null,
-  sentence?: ModelStringInput | null,
-  and?: Array< ModelTweetFilterInput | null > | null,
-  or?: Array< ModelTweetFilterInput | null > | null,
-  not?: ModelTweetFilterInput | null,
-  userTweetsId?: ModelIDInput | null,
+export type ModelIntKeyConditionInput = {
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
 };
 
-export type ModelSubscriptionUserFilterInput = {
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
+export type ModelSubscriptionTweetFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
-  is_admin?: ModelSubscriptionBooleanInput | null,
-  image?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionUserFilterInput | null > | null,
-  or?: Array< ModelSubscriptionUserFilterInput | null > | null,
+  type?: ModelSubscriptionStringInput | null,
+  content?: ModelSubscriptionStringInput | null,
+  timestamp?: ModelSubscriptionIntInput | null,
+  and?: Array< ModelSubscriptionTweetFilterInput | null > | null,
+  or?: Array< ModelSubscriptionTweetFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -207,103 +178,16 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array< string | null > | null,
 };
 
-export type ModelSubscriptionBooleanInput = {
-  ne?: boolean | null,
-  eq?: boolean | null,
-};
-
-export type ModelSubscriptionTweetFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  sentence?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionTweetFilterInput | null > | null,
-  or?: Array< ModelSubscriptionTweetFilterInput | null > | null,
-};
-
-export type CreateUserMutationVariables = {
-  input: CreateUserInput,
-  condition?: ModelUserConditionInput | null,
-};
-
-export type CreateUserMutation = {
-  createUser?:  {
-    __typename: "User",
-    id: string,
-    name: string,
-    is_admin: boolean,
-    image?: string | null,
-    tweets?:  {
-      __typename: "ModelTweetConnection",
-      items:  Array< {
-        __typename: "Tweet",
-        id: string,
-        sentence: string,
-        createdAt: string,
-        updatedAt: string,
-        userTweetsId?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateUserMutationVariables = {
-  input: UpdateUserInput,
-  condition?: ModelUserConditionInput | null,
-};
-
-export type UpdateUserMutation = {
-  updateUser?:  {
-    __typename: "User",
-    id: string,
-    name: string,
-    is_admin: boolean,
-    image?: string | null,
-    tweets?:  {
-      __typename: "ModelTweetConnection",
-      items:  Array< {
-        __typename: "Tweet",
-        id: string,
-        sentence: string,
-        createdAt: string,
-        updatedAt: string,
-        userTweetsId?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteUserMutationVariables = {
-  input: DeleteUserInput,
-  condition?: ModelUserConditionInput | null,
-};
-
-export type DeleteUserMutation = {
-  deleteUser?:  {
-    __typename: "User",
-    id: string,
-    name: string,
-    is_admin: boolean,
-    image?: string | null,
-    tweets?:  {
-      __typename: "ModelTweetConnection",
-      items:  Array< {
-        __typename: "Tweet",
-        id: string,
-        sentence: string,
-        createdAt: string,
-        updatedAt: string,
-        userTweetsId?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
+export type ModelSubscriptionIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  in?: Array< number | null > | null,
+  notIn?: Array< number | null > | null,
 };
 
 export type CreateTweetMutationVariables = {
@@ -315,52 +199,13 @@ export type CreateTweetMutation = {
   createTweet?:  {
     __typename: "Tweet",
     id: string,
-    user?:  {
-      __typename: "User",
-      id: string,
-      name: string,
-      is_admin: boolean,
-      image?: string | null,
-      tweets?:  {
-        __typename: "ModelTweetConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    sentence: string,
-    createdAt: string,
-    updatedAt: string,
-    userTweetsId?: string | null,
-  } | null,
-};
-
-export type UpdateTweetMutationVariables = {
-  input: UpdateTweetInput,
-  condition?: ModelTweetConditionInput | null,
-};
-
-export type UpdateTweetMutation = {
-  updateTweet?:  {
-    __typename: "Tweet",
-    id: string,
-    user?:  {
-      __typename: "User",
-      id: string,
-      name: string,
-      is_admin: boolean,
-      image?: string | null,
-      tweets?:  {
-        __typename: "ModelTweetConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    sentence: string,
-    createdAt: string,
-    updatedAt: string,
-    userTweetsId?: string | null,
+    type: string,
+    content: string,
+    owner?: string | null,
+    timestamp: number,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -373,77 +218,13 @@ export type DeleteTweetMutation = {
   deleteTweet?:  {
     __typename: "Tweet",
     id: string,
-    user?:  {
-      __typename: "User",
-      id: string,
-      name: string,
-      is_admin: boolean,
-      image?: string | null,
-      tweets?:  {
-        __typename: "ModelTweetConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    sentence: string,
-    createdAt: string,
-    updatedAt: string,
-    userTweetsId?: string | null,
-  } | null,
-};
-
-export type GetUserQueryVariables = {
-  id: string,
-};
-
-export type GetUserQuery = {
-  getUser?:  {
-    __typename: "User",
-    id: string,
-    name: string,
-    is_admin: boolean,
-    image?: string | null,
-    tweets?:  {
-      __typename: "ModelTweetConnection",
-      items:  Array< {
-        __typename: "Tweet",
-        id: string,
-        sentence: string,
-        createdAt: string,
-        updatedAt: string,
-        userTweetsId?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListUsersQueryVariables = {
-  filter?: ModelUserFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListUsersQuery = {
-  listUsers?:  {
-    __typename: "ModelUserConnection",
-    items:  Array< {
-      __typename: "User",
-      id: string,
-      name: string,
-      is_admin: boolean,
-      image?: string | null,
-      tweets?:  {
-        __typename: "ModelTweetConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
+    type: string,
+    content: string,
+    owner?: string | null,
+    timestamp: number,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -455,23 +236,13 @@ export type GetTweetQuery = {
   getTweet?:  {
     __typename: "Tweet",
     id: string,
-    user?:  {
-      __typename: "User",
-      id: string,
-      name: string,
-      is_admin: boolean,
-      image?: string | null,
-      tweets?:  {
-        __typename: "ModelTweetConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    sentence: string,
-    createdAt: string,
-    updatedAt: string,
-    userTweetsId?: string | null,
+    type: string,
+    content: string,
+    owner?: string | null,
+    timestamp: number,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -487,105 +258,98 @@ export type ListTweetsQuery = {
     items:  Array< {
       __typename: "Tweet",
       id: string,
-      user?:  {
-        __typename: "User",
-        id: string,
-        name: string,
-        is_admin: boolean,
-        image?: string | null,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-      sentence: string,
-      createdAt: string,
-      updatedAt: string,
-      userTweetsId?: string | null,
+      type: string,
+      content: string,
+      owner?: string | null,
+      timestamp: number,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
-export type OnCreateUserSubscriptionVariables = {
-  filter?: ModelSubscriptionUserFilterInput | null,
+export type SyncTweetsQueryVariables = {
+  filter?: ModelTweetFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
 };
 
-export type OnCreateUserSubscription = {
-  onCreateUser?:  {
-    __typename: "User",
-    id: string,
-    name: string,
-    is_admin: boolean,
-    image?: string | null,
-    tweets?:  {
-      __typename: "ModelTweetConnection",
-      items:  Array< {
-        __typename: "Tweet",
-        id: string,
-        sentence: string,
-        createdAt: string,
-        updatedAt: string,
-        userTweetsId?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
+export type SyncTweetsQuery = {
+  syncTweets?:  {
+    __typename: "ModelTweetConnection",
+    items:  Array< {
+      __typename: "Tweet",
+      id: string,
+      type: string,
+      content: string,
+      owner?: string | null,
+      timestamp: number,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
-export type OnUpdateUserSubscriptionVariables = {
-  filter?: ModelSubscriptionUserFilterInput | null,
+export type TweetsByTypeAndTimestampQueryVariables = {
+  type: string,
+  timestamp?: ModelIntKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelTweetFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
-export type OnUpdateUserSubscription = {
-  onUpdateUser?:  {
-    __typename: "User",
-    id: string,
-    name: string,
-    is_admin: boolean,
-    image?: string | null,
-    tweets?:  {
-      __typename: "ModelTweetConnection",
-      items:  Array< {
-        __typename: "Tweet",
-        id: string,
-        sentence: string,
-        createdAt: string,
-        updatedAt: string,
-        userTweetsId?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
+export type TweetsByTypeAndTimestampQuery = {
+  tweetsByTypeAndTimestamp?:  {
+    __typename: "ModelTweetConnection",
+    items:  Array< {
+      __typename: "Tweet",
+      id: string,
+      type: string,
+      content: string,
+      owner?: string | null,
+      timestamp: number,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
-export type OnDeleteUserSubscriptionVariables = {
-  filter?: ModelSubscriptionUserFilterInput | null,
+export type TweetsByOwnerAndTimestampQueryVariables = {
+  owner: string,
+  timestamp?: ModelIntKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelTweetFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
 };
 
-export type OnDeleteUserSubscription = {
-  onDeleteUser?:  {
-    __typename: "User",
-    id: string,
-    name: string,
-    is_admin: boolean,
-    image?: string | null,
-    tweets?:  {
-      __typename: "ModelTweetConnection",
-      items:  Array< {
-        __typename: "Tweet",
-        id: string,
-        sentence: string,
-        createdAt: string,
-        updatedAt: string,
-        userTweetsId?: string | null,
-      } | null >,
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
+export type TweetsByOwnerAndTimestampQuery = {
+  tweetsByOwnerAndTimestamp?:  {
+    __typename: "ModelTweetConnection",
+    items:  Array< {
+      __typename: "Tweet",
+      id: string,
+      type: string,
+      content: string,
+      owner?: string | null,
+      timestamp: number,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null >,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -597,51 +361,13 @@ export type OnCreateTweetSubscription = {
   onCreateTweet?:  {
     __typename: "Tweet",
     id: string,
-    user?:  {
-      __typename: "User",
-      id: string,
-      name: string,
-      is_admin: boolean,
-      image?: string | null,
-      tweets?:  {
-        __typename: "ModelTweetConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    sentence: string,
-    createdAt: string,
-    updatedAt: string,
-    userTweetsId?: string | null,
-  } | null,
-};
-
-export type OnUpdateTweetSubscriptionVariables = {
-  filter?: ModelSubscriptionTweetFilterInput | null,
-};
-
-export type OnUpdateTweetSubscription = {
-  onUpdateTweet?:  {
-    __typename: "Tweet",
-    id: string,
-    user?:  {
-      __typename: "User",
-      id: string,
-      name: string,
-      is_admin: boolean,
-      image?: string | null,
-      tweets?:  {
-        __typename: "ModelTweetConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    sentence: string,
-    createdAt: string,
-    updatedAt: string,
-    userTweetsId?: string | null,
+    type: string,
+    content: string,
+    owner?: string | null,
+    timestamp: number,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -653,22 +379,12 @@ export type OnDeleteTweetSubscription = {
   onDeleteTweet?:  {
     __typename: "Tweet",
     id: string,
-    user?:  {
-      __typename: "User",
-      id: string,
-      name: string,
-      is_admin: boolean,
-      image?: string | null,
-      tweets?:  {
-        __typename: "ModelTweetConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    sentence: string,
-    createdAt: string,
-    updatedAt: string,
-    userTweetsId?: string | null,
+    type: string,
+    content: string,
+    owner?: string | null,
+    timestamp: number,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };

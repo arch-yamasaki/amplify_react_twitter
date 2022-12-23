@@ -2,69 +2,17 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getUser = /* GraphQL */ `
-  query GetUser($id: ID!) {
-    getUser(id: $id) {
-      id
-      name
-      is_admin
-      image
-      tweets {
-        items {
-          id
-          sentence
-          createdAt
-          updatedAt
-          userTweetsId
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listUsers = /* GraphQL */ `
-  query ListUsers(
-    $filter: ModelUserFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        is_admin
-        image
-        tweets {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      nextToken
-    }
-  }
-`;
 export const getTweet = /* GraphQL */ `
   query GetTweet($id: ID!) {
     getTweet(id: $id) {
       id
-      user {
-        id
-        name
-        is_admin
-        image
-        tweets {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      sentence
-      createdAt
-      updatedAt
-      userTweetsId
+      type
+      content
+      owner
+      timestamp
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -77,20 +25,108 @@ export const listTweets = /* GraphQL */ `
     listTweets(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        user {
-          id
-          name
-          is_admin
-          image
-          createdAt
-          updatedAt
-        }
-        sentence
-        createdAt
-        updatedAt
-        userTweetsId
+        type
+        content
+        owner
+        timestamp
+        _version
+        _deleted
+        _lastChangedAt
       }
       nextToken
+      startedAt
+    }
+  }
+`;
+export const syncTweets = /* GraphQL */ `
+  query SyncTweets(
+    $filter: ModelTweetFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncTweets(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        type
+        content
+        owner
+        timestamp
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const tweetsByTypeAndTimestamp = /* GraphQL */ `
+  query TweetsByTypeAndTimestamp(
+    $type: String!
+    $timestamp: ModelIntKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelTweetFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    tweetsByTypeAndTimestamp(
+      type: $type
+      timestamp: $timestamp
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
+        content
+        owner
+        timestamp
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const tweetsByOwnerAndTimestamp = /* GraphQL */ `
+  query TweetsByOwnerAndTimestamp(
+    $owner: String!
+    $timestamp: ModelIntKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelTweetFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    tweetsByOwnerAndTimestamp(
+      owner: $owner
+      timestamp: $timestamp
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
+        content
+        owner
+        timestamp
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
     }
   }
 `;
