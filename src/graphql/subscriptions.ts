@@ -8,8 +8,10 @@ export const onCreateTweet = /* GraphQL */ `
       id
       type
       content
-      owner
       timestamp
+      user
+      createdAt
+      updatedAt
       _version
       _deleted
       _lastChangedAt
@@ -22,60 +24,8 @@ export const onDeleteTweet = /* GraphQL */ `
       id
       type
       content
-      owner
       timestamp
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onCreateSamplePost = /* GraphQL */ `
-  subscription OnCreateSamplePost(
-    $filter: ModelSubscriptionSamplePostFilterInput
-    $owner: String
-  ) {
-    onCreateSamplePost(filter: $filter, owner: $owner) {
-      id
-      title
-      text
-      owner
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onUpdateSamplePost = /* GraphQL */ `
-  subscription OnUpdateSamplePost(
-    $filter: ModelSubscriptionSamplePostFilterInput
-    $owner: String
-  ) {
-    onUpdateSamplePost(filter: $filter, owner: $owner) {
-      id
-      title
-      text
-      owner
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onDeleteSamplePost = /* GraphQL */ `
-  subscription OnDeleteSamplePost(
-    $filter: ModelSubscriptionSamplePostFilterInput
-    $owner: String
-  ) {
-    onDeleteSamplePost(filter: $filter, owner: $owner) {
-      id
-      title
-      text
-      owner
+      user
       createdAt
       updatedAt
       _version

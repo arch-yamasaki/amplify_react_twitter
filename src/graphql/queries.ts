@@ -8,8 +8,10 @@ export const getTweet = /* GraphQL */ `
       id
       type
       content
-      owner
       timestamp
+      user
+      createdAt
+      updatedAt
       _version
       _deleted
       _lastChangedAt
@@ -27,8 +29,10 @@ export const listTweets = /* GraphQL */ `
         id
         type
         content
-        owner
         timestamp
+        user
+        createdAt
+        updatedAt
         _version
         _deleted
         _lastChangedAt
@@ -55,73 +59,8 @@ export const syncTweets = /* GraphQL */ `
         id
         type
         content
-        owner
         timestamp
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getSamplePost = /* GraphQL */ `
-  query GetSamplePost($id: ID!) {
-    getSamplePost(id: $id) {
-      id
-      title
-      text
-      owner
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const listSamplePosts = /* GraphQL */ `
-  query ListSamplePosts(
-    $filter: ModelSamplePostFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listSamplePosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        title
-        text
-        owner
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncSamplePosts = /* GraphQL */ `
-  query SyncSamplePosts(
-    $filter: ModelSamplePostFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncSamplePosts(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        title
-        text
-        owner
+        user
         createdAt
         updatedAt
         _version
@@ -154,40 +93,10 @@ export const tweetsByTypeAndTimestamp = /* GraphQL */ `
         id
         type
         content
-        owner
         timestamp
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const tweetsByOwnerAndTimestamp = /* GraphQL */ `
-  query TweetsByOwnerAndTimestamp(
-    $owner: String!
-    $timestamp: ModelIntKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelTweetFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    tweetsByOwnerAndTimestamp(
-      owner: $owner
-      timestamp: $timestamp
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        type
-        content
-        owner
-        timestamp
+        user
+        createdAt
+        updatedAt
         _version
         _deleted
         _lastChangedAt

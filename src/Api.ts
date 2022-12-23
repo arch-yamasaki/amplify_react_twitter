@@ -6,16 +6,16 @@ export type CreateTweetInput = {
   id?: string | null,
   type: string,
   content: string,
-  owner?: string | null,
   timestamp: number,
+  user?: string | null,
   _version?: number | null,
 };
 
 export type ModelTweetConditionInput = {
   type?: ModelStringInput | null,
   content?: ModelStringInput | null,
-  owner?: ModelStringInput | null,
   timestamp?: ModelIntInput | null,
+  user?: ModelStringInput | null,
   and?: Array< ModelTweetConditionInput | null > | null,
   or?: Array< ModelTweetConditionInput | null > | null,
   not?: ModelTweetConditionInput | null,
@@ -78,8 +78,10 @@ export type Tweet = {
   id: string,
   type: string,
   content: string,
-  owner?: string | null,
   timestamp: number,
+  user?: string | null,
+  createdAt: string,
+  updatedAt: string,
   _version: number,
   _deleted?: boolean | null,
   _lastChangedAt: number,
@@ -90,55 +92,12 @@ export type DeleteTweetInput = {
   _version?: number | null,
 };
 
-export type CreateSamplePostInput = {
-  id?: string | null,
-  title: string,
-  text?: string | null,
-  owner?: string | null,
-  _version?: number | null,
-};
-
-export type ModelSamplePostConditionInput = {
-  title?: ModelStringInput | null,
-  text?: ModelStringInput | null,
-  owner?: ModelStringInput | null,
-  and?: Array< ModelSamplePostConditionInput | null > | null,
-  or?: Array< ModelSamplePostConditionInput | null > | null,
-  not?: ModelSamplePostConditionInput | null,
-};
-
-export type SamplePost = {
-  __typename: "SamplePost",
-  id: string,
-  title: string,
-  text?: string | null,
-  owner?: string | null,
-  createdAt: string,
-  updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
-};
-
-export type UpdateSamplePostInput = {
-  id: string,
-  title?: string | null,
-  text?: string | null,
-  owner?: string | null,
-  _version?: number | null,
-};
-
-export type DeleteSamplePostInput = {
-  id: string,
-  _version?: number | null,
-};
-
 export type ModelTweetFilterInput = {
   id?: ModelIDInput | null,
   type?: ModelStringInput | null,
   content?: ModelStringInput | null,
-  owner?: ModelStringInput | null,
   timestamp?: ModelIntInput | null,
+  user?: ModelStringInput | null,
   and?: Array< ModelTweetFilterInput | null > | null,
   or?: Array< ModelTweetFilterInput | null > | null,
   not?: ModelTweetFilterInput | null,
@@ -163,23 +122,6 @@ export type ModelIDInput = {
 export type ModelTweetConnection = {
   __typename: "ModelTweetConnection",
   items:  Array<Tweet | null >,
-  nextToken?: string | null,
-  startedAt?: number | null,
-};
-
-export type ModelSamplePostFilterInput = {
-  id?: ModelIDInput | null,
-  title?: ModelStringInput | null,
-  text?: ModelStringInput | null,
-  owner?: ModelStringInput | null,
-  and?: Array< ModelSamplePostFilterInput | null > | null,
-  or?: Array< ModelSamplePostFilterInput | null > | null,
-  not?: ModelSamplePostFilterInput | null,
-};
-
-export type ModelSamplePostConnection = {
-  __typename: "ModelSamplePostConnection",
-  items:  Array<SamplePost | null >,
   nextToken?: string | null,
   startedAt?: number | null,
 };
@@ -250,14 +192,6 @@ export type ModelSubscriptionIntInput = {
   notIn?: Array< number | null > | null,
 };
 
-export type ModelSubscriptionSamplePostFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  title?: ModelSubscriptionStringInput | null,
-  text?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionSamplePostFilterInput | null > | null,
-  or?: Array< ModelSubscriptionSamplePostFilterInput | null > | null,
-};
-
 export type CreateTweetMutationVariables = {
   input: CreateTweetInput,
   condition?: ModelTweetConditionInput | null,
@@ -269,8 +203,10 @@ export type CreateTweetMutation = {
     id: string,
     type: string,
     content: string,
-    owner?: string | null,
     timestamp: number,
+    user?: string | null,
+    createdAt: string,
+    updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -288,66 +224,8 @@ export type DeleteTweetMutation = {
     id: string,
     type: string,
     content: string,
-    owner?: string | null,
     timestamp: number,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type CreateSamplePostMutationVariables = {
-  input: CreateSamplePostInput,
-  condition?: ModelSamplePostConditionInput | null,
-};
-
-export type CreateSamplePostMutation = {
-  createSamplePost?:  {
-    __typename: "SamplePost",
-    id: string,
-    title: string,
-    text?: string | null,
-    owner?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type UpdateSamplePostMutationVariables = {
-  input: UpdateSamplePostInput,
-  condition?: ModelSamplePostConditionInput | null,
-};
-
-export type UpdateSamplePostMutation = {
-  updateSamplePost?:  {
-    __typename: "SamplePost",
-    id: string,
-    title: string,
-    text?: string | null,
-    owner?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type DeleteSamplePostMutationVariables = {
-  input: DeleteSamplePostInput,
-  condition?: ModelSamplePostConditionInput | null,
-};
-
-export type DeleteSamplePostMutation = {
-  deleteSamplePost?:  {
-    __typename: "SamplePost",
-    id: string,
-    title: string,
-    text?: string | null,
-    owner?: string | null,
+    user?: string | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
@@ -366,8 +244,10 @@ export type GetTweetQuery = {
     id: string,
     type: string,
     content: string,
-    owner?: string | null,
     timestamp: number,
+    user?: string | null,
+    createdAt: string,
+    updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -388,8 +268,10 @@ export type ListTweetsQuery = {
       id: string,
       type: string,
       content: string,
-      owner?: string | null,
       timestamp: number,
+      user?: string | null,
+      createdAt: string,
+      updatedAt: string,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
@@ -414,78 +296,8 @@ export type SyncTweetsQuery = {
       id: string,
       type: string,
       content: string,
-      owner?: string | null,
       timestamp: number,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type GetSamplePostQueryVariables = {
-  id: string,
-};
-
-export type GetSamplePostQuery = {
-  getSamplePost?:  {
-    __typename: "SamplePost",
-    id: string,
-    title: string,
-    text?: string | null,
-    owner?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type ListSamplePostsQueryVariables = {
-  filter?: ModelSamplePostFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListSamplePostsQuery = {
-  listSamplePosts?:  {
-    __typename: "ModelSamplePostConnection",
-    items:  Array< {
-      __typename: "SamplePost",
-      id: string,
-      title: string,
-      text?: string | null,
-      owner?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncSamplePostsQueryVariables = {
-  filter?: ModelSamplePostFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncSamplePostsQuery = {
-  syncSamplePosts?:  {
-    __typename: "ModelSamplePostConnection",
-    items:  Array< {
-      __typename: "SamplePost",
-      id: string,
-      title: string,
-      text?: string | null,
-      owner?: string | null,
+      user?: string | null,
       createdAt: string,
       updatedAt: string,
       _version: number,
@@ -514,36 +326,10 @@ export type TweetsByTypeAndTimestampQuery = {
       id: string,
       type: string,
       content: string,
-      owner?: string | null,
       timestamp: number,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type TweetsByOwnerAndTimestampQueryVariables = {
-  owner: string,
-  timestamp?: ModelIntKeyConditionInput | null,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelTweetFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type TweetsByOwnerAndTimestampQuery = {
-  tweetsByOwnerAndTimestamp?:  {
-    __typename: "ModelTweetConnection",
-    items:  Array< {
-      __typename: "Tweet",
-      id: string,
-      type: string,
-      content: string,
-      owner?: string | null,
-      timestamp: number,
+      user?: string | null,
+      createdAt: string,
+      updatedAt: string,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
@@ -563,8 +349,10 @@ export type OnCreateTweetSubscription = {
     id: string,
     type: string,
     content: string,
-    owner?: string | null,
     timestamp: number,
+    user?: string | null,
+    createdAt: string,
+    updatedAt: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -581,66 +369,8 @@ export type OnDeleteTweetSubscription = {
     id: string,
     type: string,
     content: string,
-    owner?: string | null,
     timestamp: number,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type OnCreateSamplePostSubscriptionVariables = {
-  filter?: ModelSubscriptionSamplePostFilterInput | null,
-  owner?: string | null,
-};
-
-export type OnCreateSamplePostSubscription = {
-  onCreateSamplePost?:  {
-    __typename: "SamplePost",
-    id: string,
-    title: string,
-    text?: string | null,
-    owner?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type OnUpdateSamplePostSubscriptionVariables = {
-  filter?: ModelSubscriptionSamplePostFilterInput | null,
-  owner?: string | null,
-};
-
-export type OnUpdateSamplePostSubscription = {
-  onUpdateSamplePost?:  {
-    __typename: "SamplePost",
-    id: string,
-    title: string,
-    text?: string | null,
-    owner?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-  } | null,
-};
-
-export type OnDeleteSamplePostSubscriptionVariables = {
-  filter?: ModelSubscriptionSamplePostFilterInput | null,
-  owner?: string | null,
-};
-
-export type OnDeleteSamplePostSubscription = {
-  onDeleteSamplePost?:  {
-    __typename: "SamplePost",
-    id: string,
-    title: string,
-    text?: string | null,
-    owner?: string | null,
+    user?: string | null,
     createdAt: string,
     updatedAt: string,
     _version: number,
