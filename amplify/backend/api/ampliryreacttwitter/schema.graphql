@@ -13,9 +13,11 @@ type Tweet
   ])
   {
     id: ID!
-    type: String! @index(name: "SortedByTimestamp", sortKeyFields:["timestamp"])
+    type: String! @index(name: "SortedByCreatedAt", sortKeyFields:["createdAt"])
     content: String!
     timestamp: Int!
-    user: String
+    user: String @index(name: "BySpesificUser", sortKeyFields:["createdAt"])
+    createdAt: AWSDateTime!
+    updatedAt: AWSDateTime!
   }
 

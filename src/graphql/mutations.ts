@@ -15,9 +15,6 @@ export const createTweet = /* GraphQL */ `
       user
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -34,9 +31,6 @@ export const deleteTweet = /* GraphQL */ `
       user
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;

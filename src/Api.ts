@@ -8,7 +8,8 @@ export type CreateTweetInput = {
   content: string,
   timestamp: number,
   user?: string | null,
-  _version?: number | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
 };
 
 export type ModelTweetConditionInput = {
@@ -16,6 +17,8 @@ export type ModelTweetConditionInput = {
   content?: ModelStringInput | null,
   timestamp?: ModelIntInput | null,
   user?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelTweetConditionInput | null > | null,
   or?: Array< ModelTweetConditionInput | null > | null,
   not?: ModelTweetConditionInput | null,
@@ -82,14 +85,10 @@ export type Tweet = {
   user?: string | null,
   createdAt: string,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
 };
 
 export type DeleteTweetInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type ModelTweetFilterInput = {
@@ -98,6 +97,8 @@ export type ModelTweetFilterInput = {
   content?: ModelStringInput | null,
   timestamp?: ModelIntInput | null,
   user?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
   and?: Array< ModelTweetFilterInput | null > | null,
   or?: Array< ModelTweetFilterInput | null > | null,
   not?: ModelTweetFilterInput | null,
@@ -123,16 +124,16 @@ export type ModelTweetConnection = {
   __typename: "ModelTweetConnection",
   items:  Array<Tweet | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
-export type ModelIntKeyConditionInput = {
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
+export type ModelStringKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
 };
 
 export enum ModelSortDirection {
@@ -146,6 +147,8 @@ export type ModelSubscriptionTweetFilterInput = {
   type?: ModelSubscriptionStringInput | null,
   content?: ModelSubscriptionStringInput | null,
   timestamp?: ModelSubscriptionIntInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionTweetFilterInput | null > | null,
   or?: Array< ModelSubscriptionTweetFilterInput | null > | null,
 };
@@ -207,9 +210,6 @@ export type CreateTweetMutation = {
     user?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -228,9 +228,6 @@ export type DeleteTweetMutation = {
     user?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -248,9 +245,6 @@ export type GetTweetQuery = {
     user?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -272,54 +266,22 @@ export type ListTweetsQuery = {
       user?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
-export type SyncTweetsQueryVariables = {
-  filter?: ModelTweetFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncTweetsQuery = {
-  syncTweets?:  {
-    __typename: "ModelTweetConnection",
-    items:  Array< {
-      __typename: "Tweet",
-      id: string,
-      type: string,
-      content: string,
-      timestamp: number,
-      user?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type TweetsByTypeAndTimestampQueryVariables = {
+export type TweetsByTypeAndCreatedAtQueryVariables = {
   type: string,
-  timestamp?: ModelIntKeyConditionInput | null,
+  createdAt?: ModelStringKeyConditionInput | null,
   sortDirection?: ModelSortDirection | null,
   filter?: ModelTweetFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type TweetsByTypeAndTimestampQuery = {
-  tweetsByTypeAndTimestamp?:  {
+export type TweetsByTypeAndCreatedAtQuery = {
+  tweetsByTypeAndCreatedAt?:  {
     __typename: "ModelTweetConnection",
     items:  Array< {
       __typename: "Tweet",
@@ -330,12 +292,34 @@ export type TweetsByTypeAndTimestampQuery = {
       user?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
+  } | null,
+};
+
+export type TweetsByUserAndCreatedAtQueryVariables = {
+  user: string,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelTweetFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type TweetsByUserAndCreatedAtQuery = {
+  tweetsByUserAndCreatedAt?:  {
+    __typename: "ModelTweetConnection",
+    items:  Array< {
+      __typename: "Tweet",
+      id: string,
+      type: string,
+      content: string,
+      timestamp: number,
+      user?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
   } | null,
 };
 
@@ -353,9 +337,6 @@ export type OnCreateTweetSubscription = {
     user?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -373,8 +354,5 @@ export type OnDeleteTweetSubscription = {
     user?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };

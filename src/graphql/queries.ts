@@ -12,9 +12,6 @@ export const getTweet = /* GraphQL */ `
       user
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -33,57 +30,23 @@ export const listTweets = /* GraphQL */ `
         user
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
     }
   }
 `;
-export const syncTweets = /* GraphQL */ `
-  query SyncTweets(
-    $filter: ModelTweetFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncTweets(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        type
-        content
-        timestamp
-        user
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const tweetsByTypeAndTimestamp = /* GraphQL */ `
-  query TweetsByTypeAndTimestamp(
+export const tweetsByTypeAndCreatedAt = /* GraphQL */ `
+  query TweetsByTypeAndCreatedAt(
     $type: String!
-    $timestamp: ModelIntKeyConditionInput
+    $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelTweetFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    tweetsByTypeAndTimestamp(
+    tweetsByTypeAndCreatedAt(
       type: $type
-      timestamp: $timestamp
+      createdAt: $createdAt
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -97,12 +60,38 @@ export const tweetsByTypeAndTimestamp = /* GraphQL */ `
         user
         createdAt
         updatedAt
-        _version
-        _deleted
-        _lastChangedAt
       }
       nextToken
-      startedAt
+    }
+  }
+`;
+export const tweetsByUserAndCreatedAt = /* GraphQL */ `
+  query TweetsByUserAndCreatedAt(
+    $user: String!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelTweetFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    tweetsByUserAndCreatedAt(
+      user: $user
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        type
+        content
+        timestamp
+        user
+        createdAt
+        updatedAt
+      }
+      nextToken
     }
   }
 `;

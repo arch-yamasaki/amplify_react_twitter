@@ -8,9 +8,9 @@ import '@aws-amplify/ui-react/styles.css';
 
 import { graphqlOperation, API } from 'aws-amplify';
 import { GraphQLResult } from '@aws-amplify/api-graphql'
-import { listTweets, tweetsByOwnerAndTimestamp } from './graphql/queries';
+import { listTweets, tweetsByUserAndCreatedAt } from './graphql/queries';
 import { createTweet } from './graphql/mutations';
-import { Tweet, CreateTweetInput, ListTweetsQuery } from './Api';
+import { Tweet, CreateTweetInput, ListTweetsQuery, TweetsByUserAndCreatedAtQuery } from './Api';
 
 
 import awsconfig from "./aws-exports"
@@ -31,9 +31,16 @@ function App() {
 
   const fetchTweets = async () => {
     try {
-      const res = await API.graphql(graphqlOperation(listTweets)) as GraphQLResult<ListTweetsQuery>
-      if (res.data?.listTweets?.items) {
-        const fetchedTweets = res.data?.listTweets?.items as Tweet[];
+      // listTweetsでの実施
+      // const res = await API.graphql(graphqlOperation(listTweets)) as GraphQLResult<ListTweetsQuery>
+      // if (res.data?.listTweets?.items) {
+      //   const fetchedTweets = res.data?.listTweets?.items as Tweet[];
+      //   setTweets(fetchedTweets);
+      // }
+      // tweetsByUserAndCreatedAtでの実施
+      const res = await API.graphql(graphqlOperation(tweetsByUserAndCreatedAt)) as GraphQLResult<TweetsByUserAndCreatedAtQuery>
+      if (res.data?.tweetsByUserAndCreatedAt?.items) {
+        const fetchedTweets = res.data?.tweetsByUserAndCreatedAt?.items as Tweet[];
         setTweets(fetchedTweets);
       }
     } catch (error) {
@@ -78,7 +85,7 @@ function App() {
             tweets.map((tweet, idx) => {
               return (
                 <div key={idx}>
-                  <div> owner : {tweet.owner}</div>
+                  <div> username : {tweet.user}</div>
                   <div> content : {tweet.content}</div>
                   <div> time : {tweet.timestamp}</div>
                   <div> ------------ </div>

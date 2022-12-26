@@ -12,9 +12,6 @@ export const onCreateTweet = /* GraphQL */ `
       user
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
@@ -28,9 +25,6 @@ export const onDeleteTweet = /* GraphQL */ `
       user
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
     }
   }
 `;
