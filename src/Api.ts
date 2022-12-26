@@ -147,6 +147,7 @@ export type ModelSubscriptionTweetFilterInput = {
   type?: ModelSubscriptionStringInput | null,
   content?: ModelSubscriptionStringInput | null,
   timestamp?: ModelSubscriptionIntInput | null,
+  user?: ModelSubscriptionStringInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionTweetFilterInput | null > | null,
