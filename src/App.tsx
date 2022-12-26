@@ -1,9 +1,12 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 
+import awsconfig from "./aws-exports"
 import { Amplify, Auth } from 'aws-amplify';
 import { Authenticator, Button, Divider, Heading, TextField } from "@aws-amplify/ui-react"
-import cognitoUserInterface from "@aws-amplify/ui-react"
+import { AmplifyUser } from "@aws-amplify/ui"
+// import cognitoUserInterface from "@aws-amplify/ui-react"
+// import AmplifyUser from "@aws-amplify/ui-react"
 import '@aws-amplify/ui-react/styles.css';
 
 import { graphqlOperation, API } from 'aws-amplify';
@@ -13,8 +16,6 @@ import { createTweet } from './graphql/mutations';
 import { Tweet, CreateTweetInput, ListTweetsQuery, TweetsByUserAndCreatedAtQuery } from './Api';
 
 
-import awsconfig from "./aws-exports"
-import { randomUUID } from 'crypto';
 // import './App.moduels.scss';
 Amplify.configure(awsconfig)
 
@@ -26,10 +27,10 @@ function App() {
   const [tweets, setTweets] = useState<Tweet[]>([])
 
   useEffect(() => {
-    fetchTweets()
+    // fetchTweets()
   })
 
-  const fetchTweets = async () => {
+  const fetchTweets = async (user: AmplifyUser) => {
     try {
       // listTweetsでの実施
       // const res = await API.graphql(graphqlOperation(listTweets)) as GraphQLResult<ListTweetsQuery>
@@ -38,10 +39,12 @@ function App() {
       //   setTweets(fetchedTweets);
       // }
       // tweetsByUserAndCreatedAtでの実施
-      const res = await API.graphql(graphqlOperation(tweetsByUserAndCreatedAt)) as GraphQLResult<TweetsByUserAndCreatedAtQuery>
+      console.log("user :", user)
+      const res = await API.graphql(graphqlOperation(tweetsByUserAndCreatedAt, { user: user.username })) as GraphQLResult<TweetsByUserAndCreatedAtQuery>
       if (res.data?.tweetsByUserAndCreatedAt?.items) {
         const fetchedTweets = res.data?.tweetsByUserAndCreatedAt?.items as Tweet[];
         setTweets(fetchedTweets);
+        console.log("fetchedTweet : ", fetchedTweets)
       }
     } catch (error) {
       console.log("error fetching Tweets", error)
@@ -72,7 +75,9 @@ function App() {
     <Authenticator >
       {({ signOut, user }) => (
         <>
-          <h1> Hello {user?.username}</h1>
+          <h2> Hello {user?.username}</h2>
+          <h2> fetchTweets </h2>
+          <Button onClick={() => (fetchTweets(user as AmplifyUser))}> fetchTweets </Button>
           <TextField
             descriptiveText="Enter a tweet"
             label="tweet area"
