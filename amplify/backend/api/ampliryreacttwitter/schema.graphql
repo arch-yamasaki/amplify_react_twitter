@@ -7,10 +7,10 @@ type Tweet
     mutations: {create: "createTweet", delete: "deleteTweet", update: null}
     subscriptions: {level: public}
   )
-  # @auth(rules: [
-  #   {allow: owner, ownerField:"user", operations:[read, create, delete]},
-  #   {allow: private, operations: [read]}
-  # ])
+  @auth(rules: [
+    {allow: owner, ownerField:"user", operations:[read, create, delete]},
+    {allow: private, operations: [read]}
+  ])
   {
     id: ID!
     type: String! @index(name: "SortedByCreatedAt", sortKeyFields:["createdAt"])

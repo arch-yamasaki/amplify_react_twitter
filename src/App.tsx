@@ -40,7 +40,8 @@ function App() {
       // }
       // tweetsByUserAndCreatedAtでの実施
       console.log("user :", user)
-      const res = await API.graphql(graphqlOperation(tweetsByUserAndCreatedAt, { user: user.username })) as GraphQLResult<TweetsByUserAndCreatedAtQuery>
+      const subUsername = `${user.attributes?.sub}::${user.username}`
+      const res = await API.graphql(graphqlOperation(tweetsByUserAndCreatedAt, { user: subUsername })) as GraphQLResult<TweetsByUserAndCreatedAtQuery>
       if (res.data?.tweetsByUserAndCreatedAt?.items) {
         const fetchedTweets = res.data?.tweetsByUserAndCreatedAt?.items as Tweet[];
         setTweets(fetchedTweets);
