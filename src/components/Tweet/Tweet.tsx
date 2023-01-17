@@ -1,15 +1,18 @@
 import React from "react";
 import { Tweet } from "Api";
-import { Divider } from "@aws-amplify/ui-react";
+import { Divider, Card, CardHeader, CardContent, Avatar, IconButton } from "@mui/material";
 
 const TweetUI = ({ tweet }: { tweet: Tweet }) => {
   return (
-    <>
-      <div>user {tweet.user}</div>
-      <div>content : {tweet.content}</div>
-      <div>createdAt : {tweet.createdAt}</div>
-      <Divider />
-    </>
+    <Card>
+      <CardHeader
+        title={tweet.user}
+        subheader={tweet.createdAt}
+      />
+      <CardContent>
+        content : {tweet.content}
+      </CardContent>
+    </Card>
   )
 }
 
