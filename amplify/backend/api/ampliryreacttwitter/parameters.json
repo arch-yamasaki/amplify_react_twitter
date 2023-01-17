@@ -1,0 +1,12 @@
+{
+  "AppSyncApiName": "ampliryreacttwitter",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2022-12-26T04:09:23.722Z",
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authampliryreacttwitter7b0f2f2b",
+      "Outputs.UserPoolId"
+    ]
+  }
+}
